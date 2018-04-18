@@ -5,11 +5,12 @@ node {
    // ------------------------------------
    // -- ETAPA: CHECK TOOLS
    // ------------------------------------
-    echo 'Resivsion de versiones de herramientas node y npm'    
+    echo 'Resivsion instalación y versionado de herramientas node y npm'    
     stage('check tools') {
-        sh "node -v"
-        //v 8 por encim
-        sh "npm -v"
+      def node =  sh "node -v"
+       def npm = sh "npm -v"
+       if(){
+       }
         //si falta
     }
     // ------------------------------------

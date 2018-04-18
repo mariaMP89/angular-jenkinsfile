@@ -1,58 +1,90 @@
 #!groovy
 
-properties(
-    [
-        [$class: 'BuildDiscarderProperty', strategy:
-          [$class: 'LogRotator', artifactDaysToKeepStr: '14', artifactNumToKeepStr: '5', daysToKeepStr: '30', numToKeepStr: '60']],
-        pipelineTriggers(
-          [
-              pollSCM('H/15 * * * *'),
-              cron('@daily'),
-          ]
-        )
-    ]
-)
 node {
-    stage('Checkout') {
-        //disable to recycle workspace data to save time/bandwidth
-        deleteDir()
-        checkout scm
-
-        //enable for commit id in build number
-        //env.git_commit_id = sh returnStdout: true, script: 'git rev-parse HEAD'
-        //env.git_commit_id_short = env.git_commit_id.take(7)
-        //currentBuild.displayName = "#${currentBuild.number}-${env.git_commit_id_short}"
+   
+   // ------------------------------------
+   // -- ETAPA: CHECK TOOLS
+   // ------------------------------------
+    echo 'Resivsion de versiones de herramientas node y npm'    
+    stage('check tools') {
+        sh "node -v"
+        //v 8 por encim
+        sh "npm -v"
+        //si falta
     }
-
-    stage('NPM Install') {
-        withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
-            sh 'npm install'
+    // ------------------------------------
+   // -- ETAPA: Construccion Proyecto angularCLi
+   // ------------------------------------
+   stage ('Build'){
+   
+  // -- Configura variables
+   echo 'Configurando variables'
+ 
+  // -- Construccion proyecto Angular-CLi
+        sh "npm i -g @angular/cli"
+        sh "npm rebuild node-sass --force"
+   //Descarga SCM
+       
+  // -- Descarga código desde SCM lqp-ang5
+  echo 'Descargando lqp de SCM
+   deleteDir()
+   checkout scm
+   // -- Descarga código desde SCM node-ang5
+  // echo 'Descargando estructura de SCM '
+   //deleteDir()
+   // checkout scm 
+ 
+ '
+   }
+   // ------------------------------------
+   // -- ETAPA: Compilar
+   // ------------------------------------
+   stage ('Compilar'){
+   echo 'Instalacion de NPM'
+   withEnv(["NPM_CONFIG_LOGLEVEL=warm"]) {
+    sh 'npm install'
         }
-    }
+   
+    echo 'Compilando aplicación'
 
-    stage('Test') {
+   // -- Compilando
+   echo 'Compilando aplicación'
+  milestone()
+        sh 'ng build'
+  
+   }
+   // ------------------------------------
+   // -- ETAPA: Test
+   // ------------------------------------
+   stage ('Test'){
+   echo 'Ejecutando tests'
         withEnv(["CHROME_BIN=/usr/bin/chromium-browser"]) {
           sh 'ng test --progress=false --watch false'
         }
         junit '**/test-results.xml'
-    }
-
-    stage('Lint') {
-        sh 'ng lint'
-    }
-
-    stage('Build') {
-        milestone()
-        sh 'ng build --prod --aot --sm --progress=false'
-    }
-
-    stage('Archive') {
-        sh 'tar -cvzf dist.tar.gz --strip-components=1 dist'
-        archive 'dist.tar.gz'
-    }
-
-    stage('Deploy') {
-        milestone()
-        echo "Deploying..."
-    }
+   }
+      // ------------------------------------
+   // -- ETAPA: Sonar
+   // ------------------------------------
+   stage ('Sonar'){
+   echo 'Ejecutando pruebas Sonar'
+   }
+   // ------------------------------------
+   // -- ETAPA: Empaquetado y versionado
+   // ------------------------------------
+   stage ('Empaquetar y versionado'){
+       // sh 'tar -cvzf dist.tar.gz --strip-components=1 dist'
+        //archive 'dist.tar.gz'
+   echo 'Instala el paquete generado en el repositorio maven'
+   
+   }
+   // ------------------------------------
+   // -- ETAPA: Nexus
+   // ------------------------------------
+   stage ('Subida Nexus'){
+     
+    echo 'Subida a Nexus'
+      
+   }
+   
 }

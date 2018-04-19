@@ -14,7 +14,6 @@ node {
   
         echo 'Descargando SCM'
         //deleteDir()
-       where git
          
        checkout scm
     }

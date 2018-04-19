@@ -9,28 +9,13 @@ node {
     
     stage ('Build'){
    
-     // -- Construccion proyecto Angular-CLi
-
-        //sh "npm i -g @angular/cli"
-        // sh "npm rebuild node-sass --force"
-       
+      
      // -- Descarga código desde SCM liberneo-app-ang5
   
-        echo 'Descargando lqp + lqde SCM'
-        deleteDir()
-        checkout scm
-
-    // -- Descarga código desde SCM lqp-ang5
-  
-      //  echo 'Descargando lqp SCM'
-        //sh "cd node_ang5/src/app"
-        //checkout scm
-
-    // -- Descarga código desde SCM lqpBridge
-  
-        echo 'Descargando  lqpBridge SCM'
-       // sh "cd node_ang5/src/app"
-      //  checkout scm
+        echo 'Descargando SCM'
+        //deleteDir()
+        "cmd /cnpm checkout scm".execute() 
+        "checkout scm" .execute()
     }
 
 // ---------------------------------------------------------------------------
@@ -42,7 +27,8 @@ node {
     // -- Ejecucion del npm install para la obtencion del node_module
         
         echo 'Instalacion de NPM'
-        "npm install" .execute()
+       "cmd /cnpm install".execute()  
+      "npm install" .execute()
         
     // -- Compilando
   

@@ -28,12 +28,7 @@ node {
   echo 'Descargando lqp de SCM'
    deleteDir()
    checkout scm
-   // -- Descarga código desde SCM node-ang5
-  // echo 'Descargando estructura de SCM '
-   //deleteDir()
-   // checkout scm 
- 
- '
+
    }
    // ------------------------------------
    // -- ETAPA: Compilar

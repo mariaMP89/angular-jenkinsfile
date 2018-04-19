@@ -19,8 +19,8 @@ node {
    echo 'Configurando variables'
  
   // -- Construccion proyecto Angular-CLi
-        sh "npm i -g @angular/cli"
-        sh "npm rebuild node-sass --force"
+       // sh "npm i -g @angular/cli"
+       // sh "npm rebuild node-sass --force"
    //Descarga SCM
        
   // -- Descarga código desde SCM lqp-ang5

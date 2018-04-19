@@ -11,11 +11,11 @@ node {
         echo 'Resivsion instalación y versionado de herramientas node y npm'
 
     // -- Se comprueba si esta instalada la version igual o superor a 8 del node
-        sh 'apt-get update'
+        sh 'sudo apt-get update'
         echo 'Version instalada del nodejs'
         def nodeV =  sh "node -v"
         if (nodeV < 8 || nodeV == null){
-           sh 'apt-get install nodejs'
+           sh 'sudo apt-get install nodejs'
         }else{
             sh "node -v"
         }
@@ -25,7 +25,7 @@ node {
         echo 'Version instalada de npm'
         def npmV = sh "npm -v"
         if(npm == null){
-            sh "install npm"
+            sh "sudo install npm"
         }else{
             sh "npm -v"
         }

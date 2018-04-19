@@ -14,8 +14,9 @@ node {
   
         echo 'Descargando SCM'
         //deleteDir()
-        "cmd /cnpm checkout scm".execute() 
-        "checkout scm" .execute()
+       where git
+         
+       checkout scm
     }
 
 // ---------------------------------------------------------------------------

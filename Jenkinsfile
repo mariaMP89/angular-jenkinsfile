@@ -25,7 +25,7 @@ node {
    //Descarga SCM
        
   // -- Descarga código desde SCM lqp-ang5
-  echo 'Descargando lqp de SCM
+  echo 'Descargando lqp de SCM'
    deleteDir()
    checkout scm
    // -- Descarga código desde SCM node-ang5

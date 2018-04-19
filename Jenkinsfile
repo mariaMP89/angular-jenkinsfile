@@ -16,6 +16,7 @@ node {
         //deleteDir()
          
        checkout scm
+       echo '----------------------termina descarga'
     }
 
 // ---------------------------------------------------------------------------
@@ -26,10 +27,10 @@ node {
   
     // -- Ejecucion del npm install para la obtencion del node_module
         
-        echo 'Instalacion de NPM'
-       "cmd /cnpm install".execute()  
+        echo 'Instalacion de NPM--------------------------------------------'
+       "cmd /c npm install".execute()  
       "npm install" .execute()
-        
+             echo 'Finalizacion instalacion de NPM--------------------------------------------'
     // -- Compilando
   
         echo 'Compilando aplicación'

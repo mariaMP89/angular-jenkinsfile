@@ -7,8 +7,7 @@ node {
    // ------------------------------------
     echo 'Resivsion instalación y versionado de herramientas node y npm'    
     stage('check tools') {
-       sh "node -v"
-       sh "npm -v"
+    echo 'Empezamossssss'
        
     }
     // ------------------------------------

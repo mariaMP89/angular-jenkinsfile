@@ -11,14 +11,17 @@ node {
         echo 'Resivsion instalación y versionado de herramientas node y npm'
 
     // -- Se comprueba si esta instalada la version igual o superor a 8 del node
-        sh 'sudo apt-get update'
-        echo 'Version instalada del nodejs'
-        def nodeV =  sh "node -v"
-        if (nodeV < 8 || nodeV == null){
-           sh 'sudo apt-get install nodejs'
-        }else{
-            sh "node -v"
-        }
+       // sh 'sudo apt-get update'
+       // echo 'Version instalada del nodejs'
+       // def nodeV =  sh "node -v"
+       // if (nodeV < 8 || nodeV == null){
+         //  sh 'sudo apt-get install nodejs'
+       // }else{
+        //    sh "node -v"
+        //}
+       
+       def nodeHome = tool name: 'node-8.0.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+  sh "${nodeHome}/bin/node -v"
 
     // -- Se comprueba si esta instalada la version del npm
         

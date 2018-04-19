@@ -2,34 +2,6 @@
 
 node {
    
-// ---------------------------------------------------------------------------
-// -- ETAPA: CHECK TOOLS
-// ---------------------------------------------------------------------------
-      
-    stage('check tools') {
-     
-        echo 'Resivsion instalación y versionado de herramientas node y npm'
-
-    // -- Se comprueba si esta instalada la version igual o superor a 8 del node
-        sh 'apt-get update'
-        echo 'Version instalada del nodejs'
-        def nodeV =  sh "node -v"
-        if (nodeV < 8 || nodeV == null){
-           sh 'apt-get install nodejs'
-        }else{
-            sh "node -v"
-        }
-
-    // -- Se comprueba si esta instalada la version del npm
-        
-        echo 'Version instalada de npm'
-        def npmV = sh "npm -v"
-        if(npm == null){
-            sh "install npm"
-        }else{
-            sh "npm -v"
-        }
-    }
 
 // ---------------------------------------------------------------------------
 // -- ETAPA: Construccion Proyecto angularCLi
@@ -39,7 +11,7 @@ node {
    
      // -- Construccion proyecto Angular-CLi
 
-        sh "npm i -g @angular/cli"
+        //sh "npm i -g @angular/cli"
         // sh "npm rebuild node-sass --force"
        
      // -- Descarga código desde SCM liberneo-app-ang5
@@ -50,15 +22,15 @@ node {
 
     // -- Descarga código desde SCM lqp-ang5
   
-        echo 'Descargando lqp SCM'
-        sh "cd node_ang5/src/app"
-        checkout scm
+      //  echo 'Descargando lqp SCM'
+        //sh "cd node_ang5/src/app"
+        //checkout scm
 
     // -- Descarga código desde SCM lqpBridge
   
         echo 'Descargando  lqpBridge SCM'
-        sh "cd node_ang5/src/app"
-        checkout scm
+       // sh "cd node_ang5/src/app"
+      //  checkout scm
     }
 
 // ---------------------------------------------------------------------------
@@ -70,7 +42,7 @@ node {
     // -- Ejecucion del npm install para la obtencion del node_module
         
         echo 'Instalacion de NPM'
-        sh 'npm install'
+        "npm install" .execute()
         
     // -- Compilando
   
@@ -80,8 +52,11 @@ node {
     // --  MILESTONE  garantiza que una compilación más antigua no anule una compilación más nueva,
     // por lo que nunca se permitirá que la compilación más antigua pase un milestone
     // (se cancela) si una compilación más nueva ya pasó
+   "cmd /c ng build".execute()
 
-        sh 'ng build'
+   "ng build".execute()
+
+      
     }
 
 // ---------------------------------------------------------------------------

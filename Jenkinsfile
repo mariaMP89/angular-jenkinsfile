@@ -7,11 +7,9 @@ node {
    // ------------------------------------
     echo 'Resivsion instalación y versionado de herramientas node y npm'    
     stage('check tools') {
-      def node =  sh "node -v"
-       def npm = sh "npm -v"
-       if(){
-       }
-        //si falta
+       sh "node -v"
+       sh "npm -v"
+       
     }
     // ------------------------------------
    // -- ETAPA: Construccion Proyecto angularCLi

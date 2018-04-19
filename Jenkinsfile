@@ -17,21 +17,21 @@ node {
        // if (nodeV < 8 || nodeV == null){
          //  sh 'sudo apt-get install nodejs'
        // }else{
-        //    sh "node -v"
+           sh 'node -v'
         //}
        
-       def nodeHome = tool name: 'node-8.0.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-  sh "${nodeHome}/bin/node -v"
+      // def nodeHome = tool name: 'node-8.0.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+// sh "${nodeHome}/bin/node -v"
 
     // -- Se comprueba si esta instalada la version del npm
         
         echo 'Version instalada de npm'
-        def npmV = sh "npm -v"
-        if(npm == null){
-            sh "sudo install npm"
-        }else{
-            sh "npm -v"
-        }
+       // def npmV = sh "npm -v"
+       // if(npm == null){
+         //   sh "sudo install npm"
+       // }else{
+            sh 'npm -v'
+       // }
     }
 
 // ---------------------------------------------------------------------------
@@ -42,7 +42,7 @@ node {
    
      // -- Construccion proyecto Angular-CLi
 
-        sh "npm i -g @angular/cli"
+        sh 'npm i -g @angular/cli'
         // sh "npm rebuild node-sass --force"
        
      // -- Descarga código desde SCM liberneo-app-ang5
@@ -54,14 +54,14 @@ node {
     // -- Descarga código desde SCM lqp-ang5
   
         echo 'Descargando lqp SCM'
-        sh "cd node_ang5/src/app"
-        checkout scm
+        //sh "cd node_ang5/src/app"
+        //checkout scm
 
     // -- Descarga código desde SCM lqpBridge
   
         echo 'Descargando  lqpBridge SCM'
-        sh "cd node_ang5/src/app"
-        checkout scm
+     // sh 'cd node_ang5/src/app'
+      //  checkout scm
     }
 
 // ---------------------------------------------------------------------------
